@@ -19,12 +19,12 @@ export class FormComponent {
     @Inject(SHARED_STATE) public stateEvents: Observable<SharedState>
   ) {
     stateEvents
-      .pipe(takeWhile((state) => state.mode == MODES.EDIT))
-      .pipe(
-        distinctUntilChanged((x, y) => {
-          return x.id === y.id;
-        })
-      )
+      // .pipe(takeWhile((state) => state.mode == MODES.EDIT))
+      // .pipe(
+      //   distinctUntilChanged((x, y) => {
+      //     return x.id === y.id;
+      //   })
+      // )
       .subscribe((update) => {
         this.product = new Product();
         if (update.id != undefined) {
