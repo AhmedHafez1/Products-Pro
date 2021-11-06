@@ -12,19 +12,16 @@
     <td>{{ item.category }}</td>
     <td>{{ item.price | currency: "USD" }}</td>
     <td class="text-center">
-      <button
-        class="btn btn-danger btn-sm mr-1"
-        (click)="deleteProduct(item.id)"
-      >
+      <button class="btn btn-danger btn-sm mr-1" (click)="deleteProduct(item.id)">
         Delete
       </button>
-      <button class="btn btn-warning btn-sm" (click)="editProduct(item.id)">
+      <button class="btn btn-warning btn-sm" [routerLink]="['/form', 'edit', item.id]">
         Edit
       </button>
     </td>
   </tr>
 </table>
-<button class="btn btn-primary m-1" (click)="createProduct()">
+<button class="btn btn-primary m-1" routerLink="/form/create">
   Create New Product
 </button>
 <button class="btn btn-danger" (click)="deleteProduct(-1)">

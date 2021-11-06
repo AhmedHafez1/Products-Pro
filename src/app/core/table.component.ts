@@ -10,7 +10,8 @@ import { MODES, SharedState, SHARED_STATE } from './sharedState.model';
 export class TableComponent {
 
   constructor(private model: Model,
-    @Inject(SHARED_STATE) private observer: Observer<SharedState>) { }
+    // @Inject(SHARED_STATE) private observer: Observer<SharedState>
+  ) { }
 
   getProduct(key: number) {
     return this.model.getProduct(key);
@@ -24,11 +25,11 @@ export class TableComponent {
     this.model.deleteProduct(key as number);
   }
 
-  editProduct(key: number | undefined) {
-    this.observer.next(new SharedState(MODES.EDIT, key))
-  }
+  // editProduct(key: number | undefined) {
+  //   this.observer.next(new SharedState(MODES.EDIT, key))
+  // }
 
-  createProduct() {
-    this.observer.next(new SharedState(MODES.CREATE))
-  }
+  // createProduct() {
+  //   this.observer.next(new SharedState(MODES.CREATE))
+  // }
 }

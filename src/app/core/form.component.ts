@@ -5,6 +5,7 @@ import { Product } from '../model/product.model';
 import { Model } from '../model/repository.model';
 import { MODES, SharedState, SHARED_STATE } from './sharedState.model';
 import { distinctUntilChanged, skipWhile, takeWhile } from 'rxjs/operators';
+import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'paForm',
   templateUrl: 'form.component.html',
@@ -16,32 +17,26 @@ export class FormComponent {
 
   constructor(
     private model: Model,
-    @Inject(SHARED_STATE) public stateEvents: Observable<SharedState>
+    private activeRoute: ActivatedRoute,
+    private router: Router
   ) {
-    stateEvents
-      // .pipe(takeWhile((state) => state.mode == MODES.EDIT))
-      // .pipe(
-      //   distinctUntilChanged((x, y) => {
-      //     return x.id === y.id;
-      //   })
-      // )
-      .subscribe((update) => {
-        this.product = new Product();
-        if (update.id != undefined) {
-          Object.assign(this.product, this.model.getProduct(update.id));
-        }
+    this.editing = this.activeRoute.snapshot.params['mode'] == "edit";
+    let id = this.activeRoute.snapshot.params['id'];
 
-        this.editing = update.mode == MODES.EDIT;
-      });
+    if (id != null) {
+      Object.assign(this.product, this.model.getProduct(id) || new Product());
+    }
   }
+
 
   editing: boolean = false;
 
   submitForm(form: NgForm) {
     if (form.valid) {
       this.model.saveProduct(this.product);
-      this.product = new Product();
-      form.reset();
+      // this.product = new Product();
+      // form.reset();
+      this.router.navigateByUrl('/');
     }
   }
 
