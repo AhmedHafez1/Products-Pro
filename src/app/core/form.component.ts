@@ -16,7 +16,7 @@ export class FormComponent {
   lastId: number | undefined;
 
   constructor(
-    private model: Model,
+    public model: Model,
     private activeRoute: ActivatedRoute,
     private router: Router
   ) {

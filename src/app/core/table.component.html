@@ -12,10 +12,16 @@
     <td>{{ item.category }}</td>
     <td>{{ item.price | currency: "USD" }}</td>
     <td class="text-center">
-      <button class="btn btn-danger btn-sm mr-1" (click)="deleteProduct(item.id)">
+      <button
+        class="btn btn-danger btn-sm mr-1"
+        (click)="deleteProduct(item.id)"
+      >
         Delete
       </button>
-      <button class="btn btn-warning btn-sm" [routerLink]="['/form', 'edit', item.id]">
+      <button
+        class="btn btn-warning btn-sm"
+        [routerLink]="['/form', 'edit', item.id]"
+      >
         Edit
       </button>
     </td>
@@ -26,4 +32,7 @@
 </button>
 <button class="btn btn-danger" (click)="deleteProduct(-1)">
   Generate HTTP Error
+</button>
+<button class="btn btn-danger m-1" routerLink="/does/not/exist">
+  Generate Routing Error
 </button>
