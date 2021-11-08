@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { InjectionToken, Injectable, Inject } from '@angular/core';
 import { Observable, pipe, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { catchError, delay } from 'rxjs/operators';
 import { Product } from './product.model';
 export const REST_URL = new InjectionToken('rest_url');
 
@@ -46,6 +46,7 @@ export class RestDataSource {
         body,
         headers: myHeaders,
       })
+      .pipe(delay(3000))
       .pipe(
         catchError((error: Response) => {
           return throwError(

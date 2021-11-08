@@ -22,7 +22,7 @@ export class Model {
   getNextProductId(id: number): number {
     let index = this.products.findIndex(p => this.locator(p, id));
     if (index > -1) {
-      return this.products[this.products.length > index + 2
+      return this.products[this.products.length > index + 1
         ? index + 1 : 0].id;
     } else {
       return id || 0;

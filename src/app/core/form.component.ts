@@ -3,8 +3,6 @@ import { NgForm } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { Product } from '../model/product.model';
 import { Model } from '../model/repository.model';
-import { MODES, SharedState, SHARED_STATE } from './sharedState.model';
-import { distinctUntilChanged, skipWhile, takeWhile } from 'rxjs/operators';
 import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'paForm',
@@ -20,14 +18,14 @@ export class FormComponent {
     private activeRoute: ActivatedRoute,
     private router: Router
   ) {
-    this.editing = this.activeRoute.snapshot.params['mode'] == "edit";
-    let id = this.activeRoute.snapshot.params['id'];
-
-    if (id != null) {
-      Object.assign(this.product, this.model.getProduct(id) || new Product());
-    }
+    this.activeRoute.params.subscribe((params) => {
+      this.editing = params['mode'] == 'edit';
+      let id = params['id'];
+      if (id != null) {
+        Object.assign(this.product, this.model.getProduct(id) || new Product());
+      }
+    });
   }
-
 
   editing: boolean = false;
 
