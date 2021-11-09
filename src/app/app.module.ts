@@ -1,3 +1,4 @@
+import { TermsGuard } from './terms.guard';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { ModelModule } from './model/model.module';
@@ -19,6 +20,7 @@ import { routing } from './app.routing';
     routing
   ],
   declarations: [AppComponent],
-  bootstrap: [AppComponent]
+  providers: [TermsGuard],
+  bootstrap: [AppComponent],
 })
 export class AppModule { }

@@ -1,9 +1,12 @@
+import { UnsavedGuard } from './core/unsaved.guard';
+import { TermsGuard } from './terms.guard';
 import { CategoryCountComponent } from './core/categoryCount.component';
 import { ProductCountComponent } from './core/productCount.component';
 import { NotFoundComponent } from './core/notFound.component';
 import { RouterModule, Routes } from '@angular/router';
 import { FormComponent } from './core/form.component';
 import { TableComponent } from './core/table.component';
+import { ModelResolver } from './model/model.resolver';
 
 const childRoutes: Routes = [
   { path: 'products', component: ProductCountComponent },
@@ -12,14 +15,27 @@ const childRoutes: Routes = [
 ];
 
 const routes: Routes = [
-  { path: 'form/:mode/:id', component: FormComponent },
-  { path: 'form/:mode', component: FormComponent },
+  {
+    path: 'form/:mode/:id',
+    component: FormComponent,
+    resolve: { model: ModelResolver },
+    canDeactivate: [UnsavedGuard],
+  },
+  { path: 'form/:mode', component: FormComponent, canActivate: [TermsGuard] },
   {
     path: 'table',
     component: TableComponent,
     children: childRoutes,
+    resolve: { model: ModelResolver },
+    canActivateChild: [TermsGuard],
   },
-  { path: 'table/:category', component: TableComponent, children: childRoutes },
+  {
+    path: 'table/:category',
+    component: TableComponent,
+    children: childRoutes,
+    resolve: { model: ModelResolver },
+    canActivateChild: [TermsGuard],
+  },
   { path: '', redirectTo: '/table', pathMatch: 'full' },
   { path: '**', component: NotFoundComponent },
 ];

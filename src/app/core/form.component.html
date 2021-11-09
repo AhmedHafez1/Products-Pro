@@ -16,12 +16,7 @@
     Next
   </button>
 </div>
-<form
-  novalidate
-  #form="ngForm"
-  (ngSubmit)="submitForm(form)"
-  (reset)="resetForm()"
->
+<form novalidate #form="ngForm" (ngSubmit)="submitForm(form)">
   <div class="form-group">
     <label>Name</label>
     <input
@@ -58,7 +53,7 @@
   >
     {{ editing ? "Save" : "Create" }}
   </button>
-  <button type="reset" class="btn btn-secondary m-1" routerLink="/">
+  <button type="button" class="btn btn-secondary m-1" routerLink="/">
     Cancel
   </button>
 </form>
