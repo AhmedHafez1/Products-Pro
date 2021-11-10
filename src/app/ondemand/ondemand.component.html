@@ -1,0 +1,17 @@
+<div class="bg-primary text-white p-2">This is the ondemand component</div>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12 p-2">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-6 p-2">
+      <router-outlet name="left"></router-outlet>
+    </div>
+    <div class="col-6 p-2">
+      <router-outlet name="right"></router-outlet>
+    </div>
+  </div>
+</div>
+<button class="btn btn-primary m-2" routerLink="/">Back</button>

@@ -9,18 +9,12 @@ import { FormComponent } from './core/form.component';
 import { MessageComponent } from './messages/message.component';
 import { AppComponent } from './app.component';
 import { routing } from './app.routing';
+import { LoadGuard } from './load.guard';
 
 @NgModule({
-
-  imports: [
-    BrowserModule,
-    ModelModule,
-    CoreModule,
-    MessageModule,
-    routing
-  ],
+  imports: [BrowserModule, ModelModule, CoreModule, MessageModule, routing],
   declarations: [AppComponent],
-  providers: [TermsGuard],
+  providers: [TermsGuard, LoadGuard],
   bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

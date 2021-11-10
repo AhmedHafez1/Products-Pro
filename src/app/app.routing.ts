@@ -1,3 +1,4 @@
+import { LoadGuard } from './load.guard';
 import { UnsavedGuard } from './core/unsaved.guard';
 import { TermsGuard } from './terms.guard';
 import { CategoryCountComponent } from './core/categoryCount.component';
@@ -15,6 +16,12 @@ const childRoutes: Routes = [
 ];
 
 const routes: Routes = [
+  {
+    path: 'ondemand',
+    loadChildren: () =>
+      import('./ondemand/ondemand.module').then((m) => m.OndemandModule),
+    canLoad: [LoadGuard],
+  },
   {
     path: 'form/:mode/:id',
     component: FormComponent,
