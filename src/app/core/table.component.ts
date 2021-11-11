@@ -1,3 +1,4 @@
+import { HighlightTrigger } from './table.animations';
 import { ActivatedRoute } from '@angular/router';
 import { Component, Inject } from '@angular/core';
 import { Observer } from 'rxjs';
@@ -8,9 +9,11 @@ import { Product } from '../model/product.model';
 @Component({
   selector: 'paTable',
   templateUrl: 'table.component.html',
+  animations: [HighlightTrigger],
 })
 export class TableComponent {
   category: string = null;
+  highlightCategory: string = '';
 
   constructor(private model: Model, private activeRoute: ActivatedRoute) {
     this.activeRoute.params.subscribe((params) => {
@@ -37,5 +40,13 @@ export class TableComponent {
 
   deleteProduct(key: number | undefined) {
     this.model.deleteProduct(key as number);
+  }
+
+  getRowState(category: string): string {
+    return this.highlightCategory == ''
+      ? ''
+      : this.highlightCategory == category
+      ? 'selected'
+      : 'notselected';
   }
 }

@@ -46,7 +46,7 @@ export class RestDataSource {
         body,
         headers: myHeaders,
       })
-      .pipe(delay(3000))
+      // .pipe(delay(3000))
       .pipe(
         catchError((error: Response) => {
           return throwError(

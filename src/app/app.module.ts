@@ -1,3 +1,4 @@
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TermsGuard } from './terms.guard';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -12,7 +13,14 @@ import { routing } from './app.routing';
 import { LoadGuard } from './load.guard';
 
 @NgModule({
-  imports: [BrowserModule, ModelModule, CoreModule, MessageModule, routing],
+  imports: [
+    BrowserModule,
+    ModelModule,
+    CoreModule,
+    MessageModule,
+    routing,
+    BrowserAnimationsModule,
+  ],
   declarations: [AppComponent],
   providers: [TermsGuard, LoadGuard],
   bootstrap: [AppComponent],
